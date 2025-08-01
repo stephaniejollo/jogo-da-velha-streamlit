@@ -1,4 +1,4 @@
-# 🎯 Jogo da Velha com IA Boba em Streamlit
+# 🎯 Jogo da Velha em Python | Biblioteca Streamlit com IA Baseada em Heurísticas Simples
 
 <p align="center">
   <img src="screenshot.png" alt="Demonstração do Jogo" width="600">

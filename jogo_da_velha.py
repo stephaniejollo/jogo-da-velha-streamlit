@@ -68,10 +68,7 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-st.info(
-    "📱 Se estiver jogando no celular, **gire a tela para o modo horizontal** (paisagem). "
-    "Assim o layout fica mais ajustado e você visualiza melhor o tabuleiro."
-)
+st.info("📱 Se estiver jogando no celular, **gire a tela para o modo horizontal** (paisagem) para uma melhor experiência.")
     
 # Placar
 st.markdown(f"""
@@ -122,7 +119,7 @@ with col2:
     with st.expander("ℹ️ Sobre o projeto"):
         st.markdown(
             "Esse jogo da velha foi desenvolvido em Python com Streamlit, com uma IA simples que responde automaticamente após a jogada do jogador.\n"
-            "- Você joga como ❌ e o computador responde com ⭕\n"
-            "- A IA tenta ganhar, bloquear ou joga aleatoriamente\n"
-            "- Desenvolvido por **Stephanie Jollo**"
+            "- Você joga como ❌ e o computador responde com ⭕.\n"
+            "- A IA tenta ganhar, bloquear ou joga aleatoriamente.\n"
+            "- Desenvolvido por **Stephanie Jollo**."
         )

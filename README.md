@@ -14,6 +14,10 @@ Este é um jogo da velha interativo com interface web feito em Python com [Strea
 - Layout centralizado e responsivo
 - Pronto para rodar localmente ou publicar no Streamlit Cloud
 
+## 📱 Dica para usuários de celular
+Para jogar no celular, gire a tela para o modo horizontal (paisagem).
+Isso garante que o tabuleiro fique visível corretamente e os botões funcionem como esperado.
+
 ## ▶️ Como executar
 
 ```bash

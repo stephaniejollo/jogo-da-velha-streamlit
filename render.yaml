@@ -3,7 +3,7 @@ services:
     name: jogo-da-velha
     env: python
     buildCommand: pip install -r requirements.txt
-    startCommand: streamlit run jogo_da_velha.py --server.port $PORT --server.enableCORS false
+    startCommand: streamlit run jogo_da_velha.py --server.port $PORT
     envVars:
       - key: PYTHON_VERSION
         value: 3.10

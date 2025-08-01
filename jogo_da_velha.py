@@ -1,19 +1,10 @@
+
 import streamlit as st
 import random
 
 # Emojis para o jogador e o computador
 JOGADOR = "❌"
 COMPUTADOR = "⭕"
-
-# 🔧 Estilo para melhorar visual no celular
-st.markdown("""
-    <style>
-    .stButton > button {
-        height: 60px !important;
-        font-size: 30px !important;
-    }
-    </style>
-""", unsafe_allow_html=True)
 
 # Inicializar o estado do jogo
 if "tabuleiro" not in st.session_state:
@@ -39,7 +30,6 @@ def verificar_vencedor(tab):
 def jogada_do_computador():
     tab = st.session_state.tabuleiro
 
-    # Tenta vencer
     for i in range(9):
         if tab[i] == "":
             tab[i] = COMPUTADOR
@@ -47,7 +37,6 @@ def jogada_do_computador():
                 return
             tab[i] = ""
 
-    # Tenta bloquear
     for i in range(9):
         if tab[i] == "":
             tab[i] = JOGADOR
@@ -56,7 +45,6 @@ def jogada_do_computador():
                 return
             tab[i] = ""
 
-    # Escolha aleatória
     vazios = [i for i, v in enumerate(tab) if v == ""]
     if vazios:
         escolha = random.choice(vazios)
@@ -69,12 +57,12 @@ def resetar_jogo():
 
 # Título e placar
 st.title("🎯 Jogo da Velha - Você é o ❌")
-st.markdown(f"""
+st.markdown(f'''
 **Placar**
 - {JOGADOR} Jogador: {st.session_state.placar[JOGADOR]}
 - {COMPUTADOR} Computador: {st.session_state.placar[COMPUTADOR]}
 - 🤝 Empates: {st.session_state.placar["Empate"]}
-""")
+''')
 
 # Layout do tabuleiro (3x3 com st.columns)
 for linha in range(3):
@@ -84,7 +72,7 @@ for linha in range(3):
         with cols[coluna]:
             btn_key = f"casa_{i}"
             if st.session_state.tabuleiro[i] == "":
-                if st.button(" ", key=btn_key, use_container_width=True):
+                if st.button(" ", key=btn_key, use_container_width=True, help=f"Casa {i+1}"):
                     st.session_state.tabuleiro[i] = JOGADOR
                     vencedor = verificar_vencedor(st.session_state.tabuleiro)
                     if vencedor:
@@ -115,10 +103,9 @@ with col1:
     st.button("🔄 Reiniciar Jogo", on_click=resetar_jogo)
 with col2:
     with st.expander("ℹ️ Sobre o projeto"):
-        st.markdown("""
-        Esse jogo da velha foi desenvolvido em Python com Streamlit, com uma IA simples que responde automaticamente após a jogada do jogador.
-
-        - Você joga como ❌ e o computador responde com ⭕  
-        - A IA tenta ganhar, bloquear ou joga aleatoriamente  
-        - Desenvolvido por **Stephanie Jollo**
-        """)
+        st.markdown(
+            "Esse jogo da velha foi desenvolvido em Python com Streamlit, com uma IA simples que responde automaticamente após a jogada do jogador.\n"
+            "- Você joga como ❌ e o computador responde com ⭕\n"
+            "- A IA tenta ganhar, bloquear ou joga aleatoriamente\n"
+            "- Desenvolvido por **Stephanie Jollo**"
+        )

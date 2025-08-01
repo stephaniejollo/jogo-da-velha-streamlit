@@ -1,28 +1,28 @@
-import streamlit as st
-import random
 
 import streamlit as st
 import random
-
-# 🔧 Estilo personalizado para melhorar visual no celular
-st.markdown(
-    """
-    <style>
-    .stButton button {
-        height: 50px;
-        max-width: 80px;
-        font-size: 24px;
-        margin: auto;
-        display: block;
-    }
-    </style>
-    """,
-    unsafe_allow_html=True,
-)
 
 # Emojis para o jogador e o computador
 JOGADOR = "❌"
 COMPUTADOR = "⭕"
+
+# 🔧 Estilo personalizado para melhorar visual no celular
+st.markdown("""
+    <style>
+    .stButton button {
+        height: 60px !important;
+        font-size: 30px !important;
+    }
+    @media (max-width: 768px) {
+        div[data-testid="column"] {
+            display: inline-block;
+            width: 33.33% !important;
+            padding: 4px;
+            vertical-align: top;
+        }
+    }
+    </style>
+""", unsafe_allow_html=True)
 
 # Inicializar o estado do jogo
 if "tabuleiro" not in st.session_state:
@@ -85,46 +85,16 @@ st.markdown(f"""
 - 🤝 Empates: {st.session_state.placar["Empate"]}
 """)
 
-# Corrigir bug no layout mobile
-st.markdown("""
-    <style>
-        .stButton button {
-            height: 50px;
-            max-width: 80px;
-            font-size: 24px;
-            margin: auto;
-            display: block;
-        }
-
-        @media (max-width: 768px) {
-            .block-container {
-                padding-left: 0.5rem;
-                padding-right: 0.5rem;
-            }
-
-            div[data-testid="column"] {
-                display: inline-block;
-                width: 32%;
-                padding: 4px;
-                vertical-align: top;
-            }
-        }
-    </style>
-""", unsafe_allow_html=True)
-
-# Tabuleiro com responsividade melhor
-st.markdown("<div style='display: flex; justify-content: center;'>", unsafe_allow_html=True)
+# Tabuleiro
 tabuleiro_container = st.container()
-st.markdown("</div>", unsafe_allow_html=True)
-
 with tabuleiro_container:
     for i in range(3):
-        cols = st.columns([1, 1, 1], gap="small")
+        cols = st.columns(3)
         for j in range(3):
             idx = i * 3 + j
             with cols[j]:
                 if st.session_state.tabuleiro[idx] == "":
-                    if st.button(" ", key=idx, use_container_width=True) and st.session_state.vencedor is None:
+                    if st.button(" ", key=idx, help=f"Posição {idx}", use_container_width=True) and st.session_state.vencedor is None:
                         st.session_state.tabuleiro[idx] = JOGADOR
                         vencedor_pos_jogador = verificar_vencedor(st.session_state.tabuleiro)
 

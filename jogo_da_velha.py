@@ -1,4 +1,3 @@
-
 import streamlit as st
 import random
 
@@ -13,13 +12,20 @@ st.markdown("""
         height: 60px !important;
         font-size: 30px !important;
     }
-    @media (max-width: 768px) {
-        div[data-testid="column"] {
-            display: inline-block;
-            width: 33.33% !important;
-            padding: 4px;
-            vertical-align: top;
-        }
+    .tabela {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 6px;
+        max-width: 300px;
+        margin: auto;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+    .botao-jogo button {
+        width: 100%;
+        height: 80px;
+        font-size: 36px;
+        border-radius: 8px;
     }
     </style>
 """, unsafe_allow_html=True)
@@ -48,7 +54,6 @@ def verificar_vencedor(tab):
 def jogada_do_computador():
     tab = st.session_state.tabuleiro
 
-    # Verificar se pode ganhar
     for i in range(9):
         if tab[i] == "":
             tab[i] = COMPUTADOR
@@ -56,7 +61,6 @@ def jogada_do_computador():
                 return
             tab[i] = ""
 
-    # Verificar se pode bloquear o jogador
     for i in range(9):
         if tab[i] == "":
             tab[i] = JOGADOR
@@ -65,7 +69,6 @@ def jogada_do_computador():
                 return
             tab[i] = ""
 
-    # Escolher aleatoriamente
     vazios = [i for i, v in enumerate(tab) if v == ""]
     if vazios:
         escolha = random.choice(vazios)
@@ -85,28 +88,10 @@ st.markdown(f"""
 - 🤝 Empates: {st.session_state.placar["Empate"]}
 """)
 
-# Tabuleiro com layout forçado 3x3 via HTML e botões separados
-st.markdown("""
-<style>
-.tabela {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 6px;
-    max-width: 300px;
-    margin: auto;
-}
-.botao-jogo button {
-    width: 100%;
-    height: 60px;
-    font-size: 32px;
-}
-</style>
-<div class="tabela">
-""", unsafe_allow_html=True)
-
+# Renderizar tabuleiro
+st.markdown('<div class="tabela">', unsafe_allow_html=True)
 for idx in range(9):
     btn_key = f"casa_{idx}"
-    col_html = f'<div class="botao-jogo">{idx}</div>'
     if st.session_state.tabuleiro[idx] == "":
         if st.button(" ", key=btn_key):
             st.session_state.tabuleiro[idx] = JOGADOR
@@ -123,8 +108,7 @@ for idx in range(9):
             st.rerun()
     else:
         st.button(st.session_state.tabuleiro[idx], key=btn_key, disabled=True)
-
-st.markdown("</div>", unsafe_allow_html=True)
+st.markdown('</div>', unsafe_allow_html=True)
 
 # Mensagem final com destaque
 if st.session_state.vencedor:

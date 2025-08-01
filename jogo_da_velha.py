@@ -66,8 +66,8 @@ st.markdown(f"""
 - 🤝 Empates: {st.session_state.placar["Empate"]}
 """)
 
-# Tabuleiro centralizado
-espaco_esquerda, area_central, espaco_direita = st.columns([1, 2, 1])
+# Tabuleiro centralizado com melhor responsividade
+espaco_esquerda, area_central, espaco_direita = st.columns([0.2, 1.6, 0.2])
 
 with area_central:
     for i in range(3):
@@ -85,7 +85,6 @@ with area_central:
                             st.session_state.placar[vencedor_pos_jogador] += 1
                             st.rerun()
                         else:
-
                             jogada_do_computador()
                             vencedor_pos_computador = verificar_vencedor(st.session_state.tabuleiro)
                             if vencedor_pos_computador:
@@ -94,7 +93,6 @@ with area_central:
                             st.rerun()
                 else:
                     st.button(st.session_state.tabuleiro[idx], key=idx, disabled=True, use_container_width=True)
-
 
 # Mensagem final com destaque
 if st.session_state.vencedor:

@@ -7,7 +7,7 @@
 ## 🎮 Versão Online:
 👉 [jogo-da-velha.streamlit.app](https://jogo-da-velha.streamlit.app)
 
-Este é um jogo da velha interativo com interface web feito em Python com [Streamlit](https://streamlit.io).  
+Este é um jogo da velha interativo com interface web feito em Python através da biblioteca [Streamlit](https://streamlit.io).  
 Você joga como ❌ e o computador joga como ⭕
 
 ## 🧠 Funcionalidades

@@ -66,12 +66,14 @@ st.markdown(f"""
 - 🤝 Empates: {st.session_state.placar["Empate"]}
 """)
 
-# Tabuleiro centralizado com melhor responsividade
-espaco_esquerda, area_central, espaco_direita = st.columns([0.2, 1.6, 0.2])
+# Tabuleiro com responsividade melhor
+st.markdown("<div style='display: flex; justify-content: center;'>", unsafe_allow_html=True)
+tabuleiro_container = st.container()
+st.markdown("</div>", unsafe_allow_html=True)
 
-with area_central:
+with tabuleiro_container:
     for i in range(3):
-        cols = st.columns(3)
+        cols = st.columns([1, 1, 1], gap="small")
         for j in range(3):
             idx = i * 3 + j
             with cols[j]:

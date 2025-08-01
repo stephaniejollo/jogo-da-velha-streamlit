@@ -1,6 +1,6 @@
 # 🧠 Jogo da Velha com IA Boba em Streamlit
 
-🎮 **Teste agora mesmo:**  
+🎮 ## Teste agora mesmo:  
 👉 [jogo-da-velha.streamlit.app](https://jogo-da-velha.streamlit.app/)
 
 Este é um jogo da velha interativo com interface web feito em Python com [Streamlit](https://streamlit.io). Você joga como ❌ e o computador joga como ⭕.

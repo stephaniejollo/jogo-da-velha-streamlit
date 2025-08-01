@@ -85,6 +85,33 @@ st.markdown(f"""
 - 🤝 Empates: {st.session_state.placar["Empate"]}
 """)
 
+# Corrigir bug no layout mobile
+st.markdown("""
+    <style>
+        .stButton button {
+            height: 50px;
+            max-width: 80px;
+            font-size: 24px;
+            margin: auto;
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .block-container {
+                padding-left: 0.5rem;
+                padding-right: 0.5rem;
+            }
+
+            div[data-testid="column"] {
+                display: inline-block;
+                width: 32%;
+                padding: 4px;
+                vertical-align: top;
+            }
+        }
+    </style>
+""", unsafe_allow_html=True)
+
 # Tabuleiro com responsividade melhor
 st.markdown("<div style='display: flex; justify-content: center;'>", unsafe_allow_html=True)
 tabuleiro_container = st.container()

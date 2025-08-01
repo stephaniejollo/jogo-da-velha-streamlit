@@ -84,7 +84,7 @@ for linha in range(3):
         with cols[coluna]:
             btn_key = f"casa_{i}"
             if st.session_state.tabuleiro[i] == "":
-                if st.button(" ", key=btn_key, use_container_width=True, help=f"Casa {i+1}"):
+                if st.button(" ", key=btn_key, use_container_width=True):
                     st.session_state.tabuleiro[i] = JOGADOR
                     vencedor = verificar_vencedor(st.session_state.tabuleiro)
                     if vencedor:

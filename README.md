@@ -4,7 +4,7 @@
   <img src="screenshot.png" alt="Demonstração do Jogo" width="600">
 </p>
 
-## 🎮 Teste agora mesmo:
+## 🎮 Versão Online:
 👉 [jogo-da-velha.streamlit.app](https://jogo-da-velha.streamlit.app)
 
 Este é um jogo da velha interativo com interface web feito em Python com [Streamlit](https://streamlit.io).  

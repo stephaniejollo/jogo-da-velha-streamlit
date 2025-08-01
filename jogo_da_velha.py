@@ -1,6 +1,25 @@
 import streamlit as st
 import random
 
+import streamlit as st
+import random
+
+# 🔧 Estilo personalizado para melhorar visual no celular
+st.markdown(
+    """
+    <style>
+    .stButton button {
+        height: 50px;
+        max-width: 80px;
+        font-size: 24px;
+        margin: auto;
+        display: block;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True,
+)
+
 # Emojis para o jogador e o computador
 JOGADOR = "❌"
 COMPUTADOR = "⭕"

@@ -85,32 +85,46 @@ st.markdown(f"""
 - 🤝 Empates: {st.session_state.placar["Empate"]}
 """)
 
-# Tabuleiro
-tabuleiro_container = st.container()
-with tabuleiro_container:
-    for i in range(3):
-        cols = st.columns(3)
-        for j in range(3):
-            idx = i * 3 + j
-            with cols[j]:
-                if st.session_state.tabuleiro[idx] == "":
-                    if st.button(" ", key=idx, help=f"Posição {idx}", use_container_width=True) and st.session_state.vencedor is None:
-                        st.session_state.tabuleiro[idx] = JOGADOR
-                        vencedor_pos_jogador = verificar_vencedor(st.session_state.tabuleiro)
+# Tabuleiro com layout forçado 3x3 via HTML e botões separados
+st.markdown("""
+<style>
+.tabela {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px;
+    max-width: 300px;
+    margin: auto;
+}
+.botao-jogo button {
+    width: 100%;
+    height: 60px;
+    font-size: 32px;
+}
+</style>
+<div class="tabela">
+""", unsafe_allow_html=True)
 
-                        if vencedor_pos_jogador:
-                            st.session_state.vencedor = vencedor_pos_jogador
-                            st.session_state.placar[vencedor_pos_jogador] += 1
-                            st.rerun()
-                        else:
-                            jogada_do_computador()
-                            vencedor_pos_computador = verificar_vencedor(st.session_state.tabuleiro)
-                            if vencedor_pos_computador:
-                                st.session_state.vencedor = vencedor_pos_computador
-                                st.session_state.placar[vencedor_pos_computador] += 1
-                            st.rerun()
-                else:
-                    st.button(st.session_state.tabuleiro[idx], key=idx, disabled=True, use_container_width=True)
+for idx in range(9):
+    btn_key = f"casa_{idx}"
+    col_html = f'<div class="botao-jogo">{idx}</div>'
+    if st.session_state.tabuleiro[idx] == "":
+        if st.button(" ", key=btn_key):
+            st.session_state.tabuleiro[idx] = JOGADOR
+            vencedor = verificar_vencedor(st.session_state.tabuleiro)
+            if vencedor:
+                st.session_state.vencedor = vencedor
+                st.session_state.placar[vencedor] += 1
+            else:
+                jogada_do_computador()
+                vencedor = verificar_vencedor(st.session_state.tabuleiro)
+                if vencedor:
+                    st.session_state.vencedor = vencedor
+                    st.session_state.placar[vencedor] += 1
+            st.rerun()
+    else:
+        st.button(st.session_state.tabuleiro[idx], key=btn_key, disabled=True)
+
+st.markdown("</div>", unsafe_allow_html=True)
 
 # Mensagem final com destaque
 if st.session_state.vencedor:

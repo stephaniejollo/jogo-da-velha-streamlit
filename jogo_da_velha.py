@@ -5,27 +5,12 @@ import random
 JOGADOR = "❌"
 COMPUTADOR = "⭕"
 
-# 🔧 Estilo personalizado para melhorar visual no celular
+# 🔧 Estilo para melhorar visual no celular
 st.markdown("""
     <style>
-    .stButton button {
+    .stButton > button {
         height: 60px !important;
         font-size: 30px !important;
-    }
-    .tabela {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 6px;
-        max-width: 300px;
-        margin: auto;
-        margin-top: 20px;
-        margin-bottom: 20px;
-    }
-    .botao-jogo button {
-        width: 100%;
-        height: 80px;
-        font-size: 36px;
-        border-radius: 8px;
     }
     </style>
 """, unsafe_allow_html=True)
@@ -50,10 +35,11 @@ def verificar_vencedor(tab):
         return "Empate"
     return None
 
-# IA boba: tenta ganhar, bloquear ou aleatório
+# IA boba
 def jogada_do_computador():
     tab = st.session_state.tabuleiro
 
+    # Tenta vencer
     for i in range(9):
         if tab[i] == "":
             tab[i] = COMPUTADOR
@@ -61,6 +47,7 @@ def jogada_do_computador():
                 return
             tab[i] = ""
 
+    # Tenta bloquear
     for i in range(9):
         if tab[i] == "":
             tab[i] = JOGADOR
@@ -69,12 +56,13 @@ def jogada_do_computador():
                 return
             tab[i] = ""
 
+    # Escolha aleatória
     vazios = [i for i, v in enumerate(tab) if v == ""]
     if vazios:
         escolha = random.choice(vazios)
         tab[escolha] = COMPUTADOR
 
-# Função para reiniciar o jogo
+# Reiniciar
 def resetar_jogo():
     st.session_state.tabuleiro = [""] * 9
     st.session_state.vencedor = None
@@ -88,29 +76,31 @@ st.markdown(f"""
 - 🤝 Empates: {st.session_state.placar["Empate"]}
 """)
 
-# Renderizar tabuleiro
-st.markdown('<div class="tabela">', unsafe_allow_html=True)
-for idx in range(9):
-    btn_key = f"casa_{idx}"
-    if st.session_state.tabuleiro[idx] == "":
-        if st.button(" ", key=btn_key):
-            st.session_state.tabuleiro[idx] = JOGADOR
-            vencedor = verificar_vencedor(st.session_state.tabuleiro)
-            if vencedor:
-                st.session_state.vencedor = vencedor
-                st.session_state.placar[vencedor] += 1
+# Layout do tabuleiro (3x3 com st.columns)
+for linha in range(3):
+    cols = st.columns(3)
+    for coluna in range(3):
+        i = linha * 3 + coluna
+        with cols[coluna]:
+            btn_key = f"casa_{i}"
+            if st.session_state.tabuleiro[i] == "":
+                if st.button(" ", key=btn_key, use_container_width=True):
+                    st.session_state.tabuleiro[i] = JOGADOR
+                    vencedor = verificar_vencedor(st.session_state.tabuleiro)
+                    if vencedor:
+                        st.session_state.vencedor = vencedor
+                        st.session_state.placar[vencedor] += 1
+                    else:
+                        jogada_do_computador()
+                        vencedor = verificar_vencedor(st.session_state.tabuleiro)
+                        if vencedor:
+                            st.session_state.vencedor = vencedor
+                            st.session_state.placar[vencedor] += 1
+                    st.rerun()
             else:
-                jogada_do_computador()
-                vencedor = verificar_vencedor(st.session_state.tabuleiro)
-                if vencedor:
-                    st.session_state.vencedor = vencedor
-                    st.session_state.placar[vencedor] += 1
-            st.rerun()
-    else:
-        st.button(st.session_state.tabuleiro[idx], key=btn_key, disabled=True)
-st.markdown('</div>', unsafe_allow_html=True)
+                st.button(st.session_state.tabuleiro[i], key=btn_key, disabled=True, use_container_width=True)
 
-# Mensagem final com destaque
+# Mensagem final
 if st.session_state.vencedor:
     if st.session_state.vencedor == JOGADOR:
         st.success(f"🎉 Jogador {JOGADOR} venceu!")

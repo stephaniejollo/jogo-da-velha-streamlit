@@ -1,4 +1,3 @@
-
 import streamlit as st
 import random
 
@@ -55,14 +54,27 @@ def resetar_jogo():
     st.session_state.tabuleiro = [""] * 9
     st.session_state.vencedor = None
 
-# Título e placar
+# Título
 st.title("🎯 Jogo da Velha - Você é o ❌")
-st.markdown(f'''
+
+# Ajuste de layout para dispositivos móveis
+st.markdown("""
+    <style>
+    .stButton > button {
+        height: 45px !important;
+        font-size: 22px !important;
+        padding: 4px 8px !important;
+    }
+    </style>
+""", unsafe_allow_html=True)
+
+# Placar
+st.markdown(f"""
 **Placar**
 - {JOGADOR} Jogador: {st.session_state.placar[JOGADOR]}
 - {COMPUTADOR} Computador: {st.session_state.placar[COMPUTADOR]}
 - 🤝 Empates: {st.session_state.placar["Empate"]}
-''')
+""")
 
 # Layout do tabuleiro (3x3 com st.columns)
 for linha in range(3):

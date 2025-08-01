@@ -1,2 +1,28 @@
-# jogo-da-velha-streamlit
-Jogo da Velha com IA simples desenvolvido em Python e Streamlit. O jogador usa ❌ e joga contra o computador ⭕, que responde automaticamente com uma lógica básica de ataque, defesa ou sorte. Inclui placar acumulado, layout responsivo e emojis interativos. Ideal para portfólio e aprendizado de lógica + interfaces web com Python.
+# 🧠 Jogo da Velha com IA Boba em Streamlit
+
+Este é um jogo da velha interativo com interface web feito em Python com [Streamlit](https://streamlit.io). Você joga como ❌ e o computador joga como ⭕.
+
+## 🚀 Funcionalidades
+
+- Interface visual com botões clicáveis
+- Emojis para representar os jogadores
+- Placar acumulado
+- IA boba que tenta vencer, bloquear ou joga aleatoriamente
+- Layout centralizado e responsivo
+- Pronto para rodar localmente ou publicar no Streamlit Cloud
+
+## ▶️ Como executar
+
+```bash
+pip install -r requirements.txt
+streamlit run jogo_da_velha.py
+```
+
+## 📦 Requisitos
+
+- Python 3.7+
+- streamlit >= 1.25
+
+---
+
+Desenvolvido por [Stephanie Jollo]

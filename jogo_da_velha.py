@@ -68,11 +68,10 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-with st.info()("📱 Dica para celular"):
-    st.markdown(
-        "Se estiver jogando no celular, **gire a tela para o modo horizontal** (paisagem). "
-        "Assim o layout fica mais ajustado e você visualiza melhor o tabuleiro."
-    )
+st.info(
+    "📱 Se estiver jogando no celular, **gire a tela para o modo horizontal** (paisagem). "
+    "Assim o layout fica mais ajustado e você visualiza melhor o tabuleiro."
+)
     
 # Placar
 st.markdown(f"""

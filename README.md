@@ -5,6 +5,7 @@
 
 Este é um jogo da velha interativo com interface web feito em Python com [Streamlit](https://streamlit.io). Você joga como ❌ e o computador joga como ⭕.
 
+
 ## 🚀 Funcionalidades
 
 - Interface visual com botões clicáveis
